@@ -1,11 +1,11 @@
 import React from 'react';
-import Workspace from "@layouts/Workspace";
+import Index from "@layouts/Workspace";
 
 const Channel = () => {
   return (
-    <Workspace>
+    <Index>
       <div>로그인 하신 것을 축하드려요!</div>
-    </Workspace>
+    </Index>
   );
 }
 
