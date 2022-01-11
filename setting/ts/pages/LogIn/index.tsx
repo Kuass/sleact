@@ -4,10 +4,10 @@ import fetcher from "@utils/fetcher";
 import axios from "axios";
 import {Button, Error, Form, Header, Input, Label, LinkContainer} from "@pages/SignUp/styles";
 import {Link, Redirect} from "react-router-dom";
-import useSWR from 'swr';
+import useSWR, {mutate} from 'swr';
 
 const LogIn = () => {
-  const {data, error, revalidate} = useSWR('/api/users', fetcher, {
+  const {data, error, revalidate, mutate} = useSWR('/api/users', fetcher, {
     dedupingInterval: 100000,
   });
   const [logInError, setLogInError] = useState(false);
@@ -27,8 +27,7 @@ const LogIn = () => {
           },
         )
         .then((response) => {
-          revalidate();
-          console.log(response.data);
+          mutate(response.data, false); // OPTIMISTIC UI
         })
         .catch((error) => {
           console.log(error.response);
@@ -36,6 +35,10 @@ const LogIn = () => {
         });
     }, [email, password]
   );
+
+  if (data === undefined) {
+    return <div>로딩중...</div>
+  }
 
   if (data) {
     return <Redirect to="/workspace/channel"/>
