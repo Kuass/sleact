@@ -3,11 +3,13 @@ import useInput from "@hooks/useInput";
 import fetcher from "@utils/fetcher";
 import axios from "axios";
 import {Button, Error, Form, Header, Input, Label, LinkContainer} from "@pages/SignUp/styles";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import useSWR from 'swr';
 
 const LogIn = () => {
-  const {data, error} = useSWR('/api/users', fetcher);
+  const {data, error, revalidate} = useSWR('/api/users', fetcher, {
+    dedupingInterval: 100000,
+  });
   const [logInError, setLogInError] = useState(false);
   const [email, onChangeEmail] = useInput('');
   const [password, onChangePassword] = useInput('');
@@ -25,14 +27,19 @@ const LogIn = () => {
           },
         )
         .then((response) => {
-          console.log(response.data)
+          revalidate();
+          console.log(response.data);
         })
         .catch((error) => {
-          console.log(error.response)
+          console.log(error.response);
           setLogInError(error.response?.data?.statusCode === 401);
         });
     }, [email, password]
   );
+
+  if (data) {
+    return <Redirect to="/workspace/channel"/>
+  }
 
   return (
     <div id="container">

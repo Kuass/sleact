@@ -1,10 +1,15 @@
 import useInput from '@hooks/useInput';
 import axios from 'axios';
 import React, {useCallback, useState,} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {Form, Label, Input, LinkContainer, Button, Header, Error, Success} from './styles';
+import useSWR from "swr";
+import fetcher from "@utils/fetcher";
 
 const SingUp = () => {
+  const {data, error, revalidate} = useSWR('/api/users', fetcher, {
+    dedupingInterval: 100000,
+  });
   const [email, onChangeEmail] = useInput('');
   const [nickname, onChangeNickname] = useInput('');
   const [password, setPassword] = useState('');
@@ -44,6 +49,10 @@ const SingUp = () => {
 
     }
   }, [email, nickname, password, passwordCheck, mismatchError]);
+
+  if (data) {
+    return <Redirect to="/workspace/channel" />
+  }
 
   return (
     <div id="container">
