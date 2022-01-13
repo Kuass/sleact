@@ -7,8 +7,6 @@ A
 back/package.json,2\0\200d78ab47f57435c648cc443315fb40d5ee0e43
 9
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-L
-setting/ts/webpack.config.ts,2\5\25e4afea3bfe64a629e5a40cf13a40141c237395
 =
 .editorconfig,6\2\626a747c8694eaae66f2afb3d1a745b045782c70
 R
