@@ -26,6 +26,8 @@ import CreateChannelModal from "@components/CreateChannelModal";
 import {useParams} from "react-router";
 import InviteWorkspaceModal from "@components/InviteWorkspaceModal";
 import InviteChannelModal from "@components/InviteChannelModal";
+import ChannelList from "@components/ChannelList";
+import DMList from "@components/DMList";
 
 const Channel = loadable(() => import('@pages/Channel'))
 const DirectMessage = loadable(() => import('@pages/DirectMessage'))
@@ -45,6 +47,7 @@ const Workspace: VFC = () => {
     dedupingInterval: 2000, // 2초
   });
   const { data: channelData } = useSWR<IChannel[]>(userData ? `/api/workspaces/${workspace}/channels` : null, fetcher);
+  const { data: memberData } = useSWR<IUser[]>(userData ? `/api/workspaces/${workspace}/members` : null, fetcher);
 
   // const { data2 } = useSWR('hello', (key) =>  { localStorage.setItem('data', key); return localStorage.getItem('data') });
 
@@ -157,6 +160,8 @@ const Workspace: VFC = () => {
                  <button onClick={onLogout}>로그아웃</button>
                </WorkspaceModal>
             </Menu>
+            <ChannelList userData={userData} />
+            <DMList userData={userData} />
             {channelData?.map((y) => (<div>{y.name}</div>))}
           </MenuScroll>
         </Channels>
