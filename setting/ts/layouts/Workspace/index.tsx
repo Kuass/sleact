@@ -160,9 +160,8 @@ const Workspace: VFC = () => {
                  <button onClick={onLogout}>로그아웃</button>
                </WorkspaceModal>
             </Menu>
-            <ChannelList userData={userData} />
-            <DMList userData={userData} />
-            {channelData?.map((y) => (<div>{y.name}</div>))}
+            <ChannelList />
+            <DMList />
           </MenuScroll>
         </Channels>
         <Chats>

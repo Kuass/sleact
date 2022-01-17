@@ -19,5 +19,3 @@ N
 front-js/layouts/App/index.jsx,8\a\8a5aca13ca507a0ade8f62a0d4f7dacc30ee04b2
 a
 1nest-typeorm/src/workspaces/workspaces.service.ts,0\b\0b2a3c3308eeb1a10ba61e61eec016a8c10a9b79
-H
-setting/ts/typings/db.ts,7\7\77f6b7e850c3414ed156a6beac6956a53fe478ab

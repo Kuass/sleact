@@ -65,22 +65,6 @@ const ChatBox: VFC<Props> = ({ chat, onSubmitForm, onChangeChat, placeholder }) 
   return (
     <ChatArea>
       <Form onSubmit={onSubmitForm}>
-        <MentionsTextarea
-          id="editor-chat"
-          value={chat}
-          onChange={onChangeChat}
-          onKeyPress={onKeydownChat}
-          placeholder={placeholder}
-          inputRef={textareaRef}
-          allowSuggestionsAboveCursor
-        >
-          <Mention
-            appendSpaceOnAdd
-            trigger="@"
-            data={memberData?.map((v) => ({ id: v.id, display: v.nickname })) || []}
-            renderSuggestion={renderSuggestion}
-          />
-        </MentionsTextarea>
         <Toolbox>
           <SendButton
             className={

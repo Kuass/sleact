@@ -7,12 +7,11 @@ import {CollapseButton} from "@components/DMList/styles";
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-interface Props {
-  userData?: IUser;
-}
-
-const DMList: FC<Props> = ({ userData }) => {
+const DMList: FC = () => {
   const { workspace } = useParams<{ workspace?: string }>();
+  const { data: userData, error, revalidate, mutate } = useSWR<IUser>('/api/users', fetcher, {
+    dedupingInterval: 2000, // 2초
+  });
   const { data: memberData } = useSWR<IUserWithOnline[]>(
     userData ? `/api/workspaces/${workspace}/members` : null,
     fetcher,

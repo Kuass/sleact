@@ -16,8 +16,7 @@ export const Form = styled.form`
   border: 1px solid rgb(29, 28, 29);
 `;
 
-//export const MentionsTextarea = styled(MentionsInput)`
-export const MentionsTextarea = styled.div`
+export const MentionsTextarea = styled(MentionsInput)`
   font-family: Slack-Lato, appleLogo, sans-serif;
   font-size: 15px;
   padding: 8px 9px;
@@ -74,8 +73,8 @@ export const EachMention = styled.button<{ focus: boolean }>`
     margin-right: 5px;
   }
   ${({ focus }) =>
-    focus &&
-    `
+  focus &&
+  `
     background: #1264a3;
     color: white;
   `};
